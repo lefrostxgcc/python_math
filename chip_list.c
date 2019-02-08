@@ -76,7 +76,7 @@ list_t *list_list(const char *s)
 	return head;
 }
 
-list_t *list_extend(list_t *p, list_t *s)
+list_t *list_extend(list_t *p, const list_t *s)
 {
 	if (!p && !s)
 		return NULL;
@@ -124,7 +124,7 @@ list_t *list_insert(list_t **head, int index, object_t obj)
 	return p;
 }
 
-int list_count(list_t *head, object_t obj)
+int list_count(const list_t *head, object_t obj)
 {
 	if (!head)
 		return 0;
@@ -202,7 +202,7 @@ const object_t *list_value(const list_t *head, int index)
 	return NULL;
 }
 
-void list_print(list_t *head)
+void list_print(const list_t *head)
 {
 	putchar('[');
 	while (head)

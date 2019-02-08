@@ -110,7 +110,7 @@ const object_t *map_value(const map_t *head, object_t key)
 	return NULL;
 }
 
-void map_print(map_t *head)
+void map_print(const map_t *head)
 {
 	putchar('{');
 	while (head)

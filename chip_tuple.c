@@ -43,7 +43,7 @@ static tuple_t *tuple_new(object_t obj)
 	return p;
 }
 
-tuple_t	*tuple_vnew(int count, ...)
+const tuple_t	*tuple_vnew(int count, ...)
 {
 	tuple_t *head = NULL;
 	va_list ap;
@@ -51,7 +51,7 @@ tuple_t	*tuple_vnew(int count, ...)
 	while (count-- > 0)
 		if (tuple_append(&head, va_arg(ap, object_t)) == NULL)
 		{
-			tuple_clear(&head);
+			tuple_clear((const tuple_t **) &head);
 			break;
 		}
 	va_end(ap);
@@ -77,11 +77,11 @@ static tuple_t *tuple_append(tuple_t **head, object_t obj)
 	return p;
 }
 
-void tuple_clear(tuple_t **head)
+void tuple_clear(const tuple_t **head)
 {
 	if (!head)
 		return;
-	tuple_t *p = *head;
+	const tuple_t *p = *head;
 	while (p)
 	{
 		tuple_t *next = p->next;
@@ -89,8 +89,7 @@ void tuple_clear(tuple_t **head)
 			free(p->data.s);
 		else if (p->data.type == CONST_STRING_T)
 			free((void *) p->data.cs);
-		p->next = NULL;
-		free(p);
+		free((void*) p);
 		p = next;
 	}
 	*head = NULL;
@@ -108,7 +107,7 @@ const object_t *tuple_value(const tuple_t *head, int index)
 	return NULL;
 }
 
-void tuple_print(tuple_t *head)
+void tuple_print(const tuple_t *head)
 {
 	putchar('(');
 	while (head)

@@ -21,7 +21,7 @@ int main(void)
 {
 	list_t *result_calc = NULL;
 	volatile long long number;
-	tuple_t *about = 
+	const tuple_t *about = 
 		tuple_vnew
 		(
 			3,

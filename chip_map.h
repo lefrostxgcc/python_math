@@ -18,7 +18,7 @@ map_t	*map_new(pair_t obj);
 map_t	*map_vnew(int count, ...);
 const object_t *map_value(const map_t *head, object_t key);
 map_t	*map_append(map_t **head, pair_t obj);
-void	map_print(map_t *head);
+void	map_print(const map_t *head);
 void	map_clear(map_t **head);
 
 #endif
