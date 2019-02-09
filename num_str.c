@@ -16,6 +16,7 @@ static list_t		*check(long long number);
 static list_t		*calc(long long number);
 static char 		*get_hundred(int nm);
 static list_t		*get_str_num(const list_t *list);
+static char			*list2str(const list_t *list_number);
 static long long	read_int64(void);
 
 int main(void)
@@ -43,6 +44,9 @@ int main(void)
 				number = read_int64();
 				list_t *result = check(number);
 				result_calc = list_extend(result_calc, result);
+				char *res_str = list2str(result_calc);
+				puts(res_str);
+				free(res_str);
 				list_clear(&result);
 				break;
 			case ValueError:
@@ -384,6 +388,33 @@ static list_t *get_str_num(const list_t *list)
 	map_clear(&tens);
 	map_clear(&hundreds);
 	return str_list;
+}
+
+static char *list2str(const list_t *list_number)
+{
+	size_t str_len = 0;
+	const int len = list_len(list_number);
+	for (int i = 0; i < len; i++)
+	{
+		char * const s = obj_str(*list_value(list_number, i));
+		str_len += strlen(s) + 1;
+		free(s);
+	}
+	if (str_len == 0)
+		return strdup("");
+	char *str_num_pr = (char *) malloc(sizeof(char) * str_len + 1);
+	char *p = str_num_pr;
+	for (int x = 0; x < len; x++)
+	{
+		char * const s = obj_str(*list_value(list_number, x));
+		const size_t s_len = strlen(s);
+		memcpy(p, s, s_len);
+		p += s_len;
+		*p++ = ' ';
+		free(s);
+	}
+	*p = '\0';
+	return str_num_pr;
 }
 
 static list_t *calc(long long number)

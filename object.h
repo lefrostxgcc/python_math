@@ -17,5 +17,6 @@ typedef struct
 } object_t;
 
 void object_print(object_t obj);
+char *obj_str(object_t obj);
 
 #endif

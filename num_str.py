@@ -27,6 +27,12 @@ def get_str_num(list):
         str_list = [hundreds[list[0]], "", units[list[2]]]
     return str_list
 
+def list2str(list_number):
+    str_num_pr = ""
+    for x in range(0, len(list_number)):
+        str_num_pr += list_number[x] + " "
+    return str_num_pr
+
 def calc(number):
     d3 = number % 10         # единицы
     d2 = number // 10 % 10   # десятки
@@ -41,7 +47,8 @@ while True:
     try:
         number = int(input("Введите число: "))
         result_calc.extend(check(number))
-        #print("Сотни прописью: ", get_hundred(result_calc[0]))
+        res_str = list2str(result_calc)
+        print(res_str)
     except KeyboardInterrupt:
         break
     except ValueError:
