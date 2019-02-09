@@ -1,5 +1,6 @@
 *.o
 math
+num_str
 a.out
 *~
 #*#

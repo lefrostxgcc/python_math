@@ -19,6 +19,7 @@ list_t	*list_remove(list_t **head, object_t obj);
 void	list_print(const list_t *head);
 const object_t *list_value(const list_t *head, int index);
 int		list_count(const list_t *head, object_t obj);
+int		list_len(const list_t *head);
 void	list_clear(list_t **head);
 
 #endif

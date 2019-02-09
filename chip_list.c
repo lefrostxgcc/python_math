@@ -143,6 +143,19 @@ int list_count(const list_t *head, object_t obj)
 	return count;
 }
 
+int list_len(const list_t *head)
+{
+	if (!head)
+		return 0;
+	int len = 0;
+	while (head)
+	{
+		head = head->next;
+		len++;
+	}
+	return len;
+}
+
 list_t *list_remove(list_t **head, object_t obj)
 {
 	if (!head || !*head)
